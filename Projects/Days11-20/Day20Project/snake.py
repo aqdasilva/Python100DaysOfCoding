@@ -10,17 +10,25 @@ RIGHT = 0
 
 class Snake:
     def __init__(self):
-      self.segments = []
-      self.createSnake()
-      self.head = self.segments[0]
+        self.segments = []
+        self.createSnake()
+        self.head = self.segments[0]
 
     def createSnake(self):
         for position in START:
-            newSegment = Turtle(shape="square")
-            newSegment.color("white")
-            newSegment.penup()
-            newSegment.goto(position)
-            self.segments.append(newSegment)
+            self.addSegment(position)
+
+    def addSegment(self, position):
+        newSegment = Turtle(shape="square")
+        newSegment.color("white")
+        newSegment.penup()
+        newSegment.goto(position)
+        self.segments.append(newSegment)
+
+    def extend(self):
+        self.addSegment(self.segments[-1].position())
+
+# add new segment when snake eats
 
     def move(self):
         for segNum in range(len(self.segments) - 1, 0, -1):
